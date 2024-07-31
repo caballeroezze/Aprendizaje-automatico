@@ -1,0 +1,18 @@
+# Codificación de variables categóricas
+categorical_cols = df.select_dtypes(include=['object']).columns
+df = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
+
+# Normalización de características numéricas
+scaler = StandardScaler()
+numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns
+df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
+
+# Mostrar el DataFrame limpio
+df.head()
+id	scrape_id	last_scraped	host_id	host_since	host_response_rate	host_acceptance_rate	host_listings_count	host_total_listings_count	latitude	...	calendar_updated_9 months ago	calendar_updated_a week ago	calendar_updated_never	calendar_updated_today	calendar_updated_yesterday	instant_bookable_t	cancellation_policy_moderate	cancellation_policy_strict	require_guest_profile_picture_t	require_guest_phone_verification_t
+0	-1.792232	0.0	2016-01-04	-1.016923	2011-08-11	0.093823	0.018125	-0.145252	-0.145252	0.170240	...	False	False	False	False	False	False	True	False	False	False
+1	-1.551686	0.0	2016-01-04	-0.727493	2013-02-21	0.262387	0.018125	-0.040447	-0.040447	0.236078	...	False	False	False	True	False	False	False	True	True	True
+2	-0.756559	0.0	2016-01-04	0.063300	2014-06-12	-2.350360	0.018125	-0.180187	-0.180187	0.017732	...	False	False	False	False	False	False	False	True	False	False
+3	0.631898	0.0	2016-01-04	-0.406951	2013-11-06	NaN	NaN	-0.215123	-0.215123	0.220980	...	False	False	False	False	False	False	False	False	False	False
+4	-1.779472	0.0	2016-01-04	-0.982930	2011-11-29	0.430952	NaN	-0.180187	-0.180187	0.091937	...	False	False	False	False	False	False	False	True	False	False
+5 rows × 56417 columns
